@@ -316,11 +316,11 @@ function createGettersAndMutationProxyFromState({ cls, proxy, state, $store, nam
           },
           set: payload => { 
             const commit = $store.commit || cls.prototype.__store_cache__.commit;
-            if( commit ) commit( refineNamespacedPath( cls.prototype.__namespacedPath__ ) + `__${className}_internal_mutator__`, { field: path, payload });
+            if( commit ) commit( refineNamespacedPath( cls.prototype.__namespacedPath__ ) + `__${className}_internal_mutator__`, { field: path, payload }, {root: true});
             else {
               // We must be creating local proxies hence, $store.commit doesn't exist
               const store = cls.prototype.__context_store__!;
-              store.commit( `__${className}_internal_mutator__`, { field: path, payload })
+              store.commit( `__${className}_internal_mutator__`, { field: path, payload }, {root: true})
             }
           },
         })
@@ -397,11 +397,11 @@ function __createGettersAndMutationProxyFromState({ cls, proxy, state, $store, n
           }else return $store[ `__${className}_internal_getter__` ]( field ) 
         },
         set: payload => { 
-          if( $store.commit ) $store.commit( namespacedPath + `__${className}_internal_mutator__`, { field, payload });
+          if( $store.commit ) $store.commit( namespacedPath + `__${className}_internal_mutator__`, { field, payload }, {root:true});
           else {
             // We must be creating local proxies hence, $store.commit doesn't exist
             const store = cls.prototype.__context_store__!;
-            store.commit( `__${className}_internal_mutator__`, { field, payload })
+            store.commit( `__${className}_internal_mutator__`, { field, payload }, {root:true})
           }
         },
       })

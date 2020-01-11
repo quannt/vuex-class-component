@@ -1,8 +1,8 @@
 {
-  "name": "vuex-class-component",
+  "name": "vuex-class-component-alt",
   "version": "2.2.1",
   "description": "\"A Type Safe Vuex Module or Store Using ES6 Classes and ES7 Decorators written in TypeScript.\"",
-  "main": "dist/index.js",
+  "main": "src/index.ts",
   "directories": {
     "test": "test"
   },
